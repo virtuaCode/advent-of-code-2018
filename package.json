@@ -1,0 +1,16 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node src/main.ts --"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.12.11",
+    "@types/axios": "^0.14.0",
+    "ts-node": "^7.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
