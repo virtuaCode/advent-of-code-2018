@@ -8,6 +8,6 @@ export async function getInput(day: string) {
     }
   }
 
-  const { data } = await axios(`https://adventofcode.com/2018/day/${day}/input`, config)
+  const { data } = await axios.get<string>(`https://adventofcode.com/2018/day/${day}/input`, config)
   return data
 }
