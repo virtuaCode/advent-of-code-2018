@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 export async function getInput(day: string) {
   const config: AxiosRequestConfig = {
     headers: {
-      'Cookie': `session=${readFileSync('session.cookie', 'utf8')}`
+      'Cookie': `session=${readFileSync('session.cookie', 'utf8').trim()}`
     }
   }
 
