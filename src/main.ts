@@ -1,5 +1,6 @@
 import { day1 } from './days/day1'
 import { day2 } from './days/day2';
+import { day3 } from './days/day3';
 
 /**
  * Run `npm start <number>` to execute the solution for an specific day 
@@ -14,6 +15,7 @@ const day = Number.parseInt(process.argv[2], 10) - 1
 const solutions = [
   day1,
   day2,
+  day3,
 ];
 
 if (Number.isNaN(day) || day >= solutions.length || day < 0) {
