@@ -3,8 +3,8 @@ import * as chai from 'chai'
 import { Rect, parseLine } from './day3'
 import { expect } from 'chai'
 
-describe('day3 part A', () => {
-    it('should parse line', () => {
+describe('Day 3', () => {
+    it('should parse rectangle', () => {
         const expected: Rect = {
             id: '#123',
             x: 30,

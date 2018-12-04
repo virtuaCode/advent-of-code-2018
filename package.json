@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node src/main.ts --",
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.spec.ts'"
+    "test": "mocha --reporter spec --compilers ts:ts-node/register ./src/**/*.spec.ts"
   },
   "license": "MIT",
   "devDependencies": {
