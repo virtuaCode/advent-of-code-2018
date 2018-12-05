@@ -11,37 +11,31 @@ export async function day5() {
 
   console.log('A:', polymer.length)
 
-  let shortest = data
+  let shortest = Infinity
 
   for (const char of alphabet) {
-    const shorter = reducePolymer(data.replace(new RegExp(char, 'gi'), ''))
+    const shorter = reducePolymer(data.replace(new RegExp(char, 'gi'), '')).length
 
-    if (shorter.length < shortest.length) {
+    if (shorter < shortest) {
       shortest = shorter
     }
   }
 
-  console.log('B:', shortest.length)
+  console.log('B:', shortest)
 }
 
 export function reducePolymer(data: string) {
   let polymer = data
-  let matched = false
-  do {
-    matched = false;
-    for (let n = 0; n < polymer.length - 1; n++) {
-      const l = polymer[n]
-      const r = polymer[n + 1]
+  let maxIndex = polymer.length - 1
+  for (let n = 0; n < maxIndex; n++) {
+    const l = polymer[n]
+    const r = polymer[n + 1]
 
-      if (l !== r && l.toLowerCase() === r.toLowerCase()) {
-        polymer = polymer.substr(0, n) + '__' + polymer.substr(n + 2);
-        matched = true
-        n++
-      }
+    if (l !== r && l.toLowerCase() === r.toLowerCase()) {
+      polymer = polymer.substr(0, n) + polymer.substr(n + 2);
+      n = Math.max(1, n - 2)
+      maxIndex -= 2
     }
-
-    polymer = polymer.replace(/_/g, '')
-  } while (matched)
-
+  }
   return polymer
 }
