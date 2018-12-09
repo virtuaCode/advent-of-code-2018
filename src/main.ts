@@ -4,6 +4,7 @@ import { day3 } from './days/day3';
 import { day4 } from './days/day4';
 import { day5 } from './days/day5';
 import { day6 } from './days/day6';
+import { day8 } from './days/day8';
 
 /**
  * Run `npm start <number>` to execute the solution for an specific day 
@@ -22,6 +23,8 @@ const solutions = [
   day4,
   day5,
   day6,
+  day6,
+  day8,
 ];
 
 if (Number.isNaN(day) || day >= solutions.length || day < 0) {
