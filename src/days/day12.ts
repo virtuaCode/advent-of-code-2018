@@ -1,7 +1,8 @@
 import { getInput } from "../helper";
 
-const USE_EXAMPLE_DATA = true
+const USE_EXAMPLE_DATA = false
 const FIVE_DOTS = '.'.repeat(5)
+const GENS = 50000000000
 
 export async function day12() {
   const data1 = await getInput('12')
@@ -23,13 +24,13 @@ export async function day12() {
   ###.# => #
   ####. => #`
 
-  const garden = new BinaryGarden((USE_EXAMPLE_DATA ? data2 : data1))
+  const gardenA = new BinaryGarden((USE_EXAMPLE_DATA ? data2 : data1))
+  gardenA.nextGenerations(20)
+  console.log('A:', gardenA.getSum())
 
-  console.log(garden.stateWithPointer)
-  garden.nextGenerations(20)
-  console.log()
-  console.log(garden.stateWithPointer)
-  console.log(garden.sum)
+  const gardenB = new BinaryGarden((USE_EXAMPLE_DATA ? data2 : data1))
+  gardenB.nextGenerationsUntilRepeat()
+  console.log('B:', gardenB.getSum(GENS - gardenB.generation ))
 }
 
 class BinaryGarden {
@@ -52,6 +53,25 @@ class BinaryGarden {
     }, new Map<string, string>())
   }
 
+  get index() {
+    return this._index
+  }
+
+  set index(index) {
+    this._index = index
+  }
+
+  nextGenerationsUntilRepeat() {
+    let previous = ''
+    let current = this._state
+
+    do {
+      previous = current
+      this.nextGenerations()
+      current = this._state
+    } while (previous !== current)
+  }
+
   nextGenerations(repeat = 1) {
     for (let n = 0; n < repeat; n++) {
       const expandedState = FIVE_DOTS + this._state + FIVE_DOTS
@@ -71,7 +91,7 @@ class BinaryGarden {
 
       for (let i = 0; i < newState.length; i++) {
         if (newState[i] === '#') {
-          firstPlant = i - 5
+          firstPlant =  i - 3
           break;
         }
       }
@@ -79,7 +99,7 @@ class BinaryGarden {
       if (firstPlant === null)
         throw new Error('no plant found')
 
-      this._index = firstPlant
+      this._index = firstPlant + this._index
       
       const matched = newState.match(/^\.*([.#]*#)\.*$/)
 
@@ -107,11 +127,11 @@ class BinaryGarden {
     return this._generation
   }
 
-  get sum() {
+  getSum(offset = 0) {
     let sum = 0
     for (let n = 0; n < this._state.length; n++) {
       if (this._state[n] === '#') {
-        sum += n + this._index
+        sum += n + this._index + offset
       }
     }
     return sum
