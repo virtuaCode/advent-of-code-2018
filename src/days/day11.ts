@@ -9,11 +9,11 @@ export async function day11() {
 
   const maxA = findMaximum(powerMap, 3, 3)
 
-  console.log(maxA)
+  console.log('A:', maxA)
 
   const maxB = findMaximum(powerMap, 1, 300)
 
-  console.log(maxB)
+  console.log('B:', maxB)
 }
 
 function buildPowerMap(data: number, size: number) {
